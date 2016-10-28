@@ -19,6 +19,7 @@ func (b *bot) UpdateAndFeed() {
 	for _, e := range err {
 		b.logger.Println(e.Error())
 	}
+	b.logger.Println("Gathered updates")
 
 	updatesStr := make([]string, len(updates))
 	for index, update := range updates {
@@ -32,10 +33,12 @@ func (b *bot) QueueToAll() {
 	genStr := b.brain.Generate(rand.Intn(30))
 	msg := basicMessage{genStr}
 
+	b.logger.Println("Queueing new message: " + genStr)
 	b.manager.QueueAll(msg)
 }
 
 func (b *bot) AddEndpoint(endpoint EndpointProvider) {
+	b.logger.Println("Adding new endpoint")
 	b.manager.AddEndpoint(endpoint)
 }
 

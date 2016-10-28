@@ -35,6 +35,10 @@ func (b *bot) QueueToAll() {
 	b.manager.QueueAll(msg)
 }
 
+func (b *bot) AddEndpoint(endpoint EndpointProvider) {
+	b.manager.AddEndpoint(endpoint)
+}
+
 func (b *bot) LogErrors() {
 	endpoints := b.manager.Endpoints()
 	for _, endpoint := range endpoints {

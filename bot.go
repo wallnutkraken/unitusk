@@ -12,6 +12,7 @@ type bot struct {
 	manager EndpointManager
 	brain *gomarkov.Chain
 	logger *log.Logger
+	maxLen int
 }
 
 func (b *bot) UpdateAndFeed() {
@@ -30,7 +31,7 @@ func (b *bot) UpdateAndFeed() {
 }
 
 func (b *bot) QueueToAll() {
-	genStr := b.brain.Generate(rand.Intn(30))
+	genStr := b.brain.Generate(rand.Intn(b.maxLen))
 	msg := basicMessage{genStr}
 
 	b.logger.Println("Queueing new message: " + genStr)

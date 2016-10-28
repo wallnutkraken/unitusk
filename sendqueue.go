@@ -30,6 +30,8 @@ func (q *basicQueue) Take() Message {
 	ret := q.messages[0]
 	if len(q.messages) == 1 {
 		q.Clear()
+	} else {
+		q.messages = q.messages[1:]
 	}
 	return ret;
 }

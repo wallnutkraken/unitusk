@@ -8,7 +8,7 @@ import (
 
 
 // New creates an instance of the Hivemind
-func New(logWriter io.Writer, chainLength int, sendIntervalSeconds int) Hivemind {
+func New(logWriter io.Writer, chainLength int, sendIntervalSeconds int, maxGenWords int) Hivemind {
 	hm := new(bot)
 	hm.logger = log.New(logWriter, "[UniTusk]", log.Ltime)
 	hm.brain = gomarkov.NewChain(chainLength)
@@ -18,5 +18,6 @@ func New(logWriter io.Writer, chainLength int, sendIntervalSeconds int) Hivemind
 	}
 	go man.sendQueueLoop(sendIntervalSeconds)
 	hm.manager = man
+	hm.maxLen = maxGenWords
 	return hm
 }
